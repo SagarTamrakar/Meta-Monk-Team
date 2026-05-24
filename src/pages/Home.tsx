@@ -18,8 +18,11 @@ import StarField from "@/components/StarField";
 import FloatingSymbols from "@/components/FloatingSymbols";
 import CinematicShowreel from "@/components/CinematicShowreel";
 
-import heroImage from "@assets/image_1779012939272.png";
-
+import heroImage from "@assets/MM_BANDAR.jpeg";
+import TOOLS from "@/data/tools";
+import AboutUs from "@/components/AboutUS";
+import VideoSlider from "@/components/VideoSlider";
+import ImageGrid from "@/components/ImageGrid";
 // ─── Animation variants ───────────────────────────────────────────────────────
 
 const fadeUp = {
@@ -62,6 +65,7 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const heroRef = React.useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = React.useState(0);
+  const [selectedCategory, setSelectedCategory] = React.useState("Motion Graphics");
 
   // Global scroll progress for the thin top bar
   const { scrollYProgress: globalProgress } = useScroll();
@@ -132,46 +136,47 @@ export default function Home() {
         <div className="absolute inset-0 z-0" style={{ transform: `translateY(${scrollY * 0.35}px) scale(1.15)`, transformOrigin: "center top" }}>
           <img src={heroImage} alt="Meta Monk Visuals" className="w-full h-full object-cover" style={{ objectPosition: "65% 50%" }} />
         </div>
-        <div className="absolute inset-0 z-10 pointer-events-none" style={{background:"radial-gradient(ellipse at 65% 50%, transparent 20%, rgba(5,5,12,0.55) 60%, rgba(5,5,12,0.95) 100%)"}} />
-        <div className="absolute inset-0 z-10 pointer-events-none" style={{background:"linear-gradient(to right, rgba(5,5,12,0.97) 0%, rgba(5,5,12,0.85) 32%, rgba(5,5,12,0.3) 58%, transparent 75%)"}} />
-        <div className="absolute inset-0 z-10 pointer-events-none" style={{background:"linear-gradient(to left, rgba(5,5,12,1) 0%, rgba(5,5,12,0.9) 15%, rgba(5,5,12,0.4) 35%, transparent 55%)"}} />
-        <div className="absolute bottom-0 left-0 right-0 h-48 z-10 pointer-events-none" style={{background:"linear-gradient(to bottom, transparent, rgba(5,5,12,1))"}} />
-        <div className="absolute top-0 left-0 right-0 h-32 z-10 pointer-events-none" style={{background:"linear-gradient(to top, transparent, rgba(5,5,12,0.7))"}} />
+        <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "radial-gradient(ellipse at 65% 50%, transparent 20%, rgba(5,5,12,0.55) 60%, rgba(5,5,12,0.95) 100%)" }} />
+        <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, rgba(5,5,12,0.97) 0%, rgba(5,5,12,0.85) 32%, rgba(5,5,12,0.3) 58%, transparent 75%)" }} />
+        <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, rgba(5,5,12,1) 0%, rgba(5,5,12,0.9) 15%, rgba(5,5,12,0.4) 35%, transparent 55%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-48 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, rgba(5,5,12,1))" }} />
+        <div className="absolute top-0 left-0 right-0 h-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, transparent, rgba(5,5,12,0.7))" }} />
         {/* Warm amber LED glow at bottom — matches studio image */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 z-10 pointer-events-none" style={{background:"linear-gradient(to top, rgba(200,120,20,0.06), transparent)"}} />
+        <div className="absolute bottom-0 left-0 right-0 h-24 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(200,120,20,0.06), transparent)" }} />
 
         {/* ── Floating tool symbols ── */}
         <FloatingSymbols />
 
         <div className="relative z-20 w-full max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-44 md:pb-32">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-2xl flex flex-col items-start gap-7">
-            <motion.div custom={0}  className="inline-flex items-center gap-2 px-4 py-1.5 border border-secondary/40 bg-secondary/5 text-secondary text-xs font-bold tracking-[0.25em] uppercase backdrop-blur-sm" style={{clipPath:"polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)"}}>
+            <motion.div custom={0} className="inline-flex items-center gap-2 px-4 py-1.5 border border-secondary/40 bg-secondary/5 text-secondary text-xs font-bold tracking-[0.25em] uppercase backdrop-blur-sm" style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)" }}>
               <Activity className="w-3.5 h-3.5" /><span>Creative Multimedia Studio</span>
               <span className="ml-2 w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
             </motion.div>
 
             {/* Animated heading */}
             <div className="overflow-hidden">
-              <motion.h1 custom={0.1}  className="text-5xl md:text-7xl lg:text-[5.5rem] font-black font-heading leading-[0.95] uppercase">
-                <span className="block text-foreground drop-shadow-[0_0_30px_rgba(255,200,50,0.35)]">Where Vision</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-[#FF8C00]">Becomes Motion</span>
+              <motion.h1 custom={0.1} className="text-5xl md:text-7xl lg:text-[5.5rem] font-black font-heading leading-[0.95] uppercase">
+                <span className="block text-foreground drop-shadow-[0_0_30px_rgba(255,200,50,0.35)]">In The</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-[#FF8C00]">Search </span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-[#FF8C00]">Of Infinity </span>
               </motion.h1>
             </div>
 
-            <motion.p custom={0.3}  className="text-base md:text-lg text-foreground/70 max-w-md leading-relaxed font-sans">
+            <motion.p custom={0.3} className="text-base md:text-lg text-foreground/70 max-w-md leading-relaxed font-sans">
               A creative multimedia studio crafting cinematic video edits, motion graphics, VFX, CGI, and high-impact content — for brands and storytellers who demand the extraordinary.
             </motion.p>
 
-            <motion.div custom={0.4}  className="flex flex-wrap gap-4 mt-2">
-              <Button size="lg" onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })} className="bg-secondary text-secondary-foreground hover:bg-secondary/80 font-heading text-base tracking-wider rounded-none px-8 py-6 shadow-[0_0_25px_rgba(0,240,255,0.5)] transition-all hover:shadow-[0_0_40px_rgba(0,240,255,0.7)]" style={{clipPath:"polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))"}}>
+            <motion.div custom={0.4} className="flex flex-wrap gap-4 mt-2">
+              <Button size="lg" onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })} className="bg-secondary text-secondary-foreground hover:bg-secondary/80 font-heading text-base tracking-wider rounded-none px-8 py-6 shadow-[0_0_25px_rgba(0,240,255,0.5)] transition-all hover:shadow-[0_0_40px_rgba(0,240,255,0.7)]" style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}>
                 VIEW SERVICES <ChevronRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} className="border border-primary/50 text-primary hover:bg-primary/10 font-heading text-base tracking-wider rounded-none px-8 py-6 backdrop-blur-sm" style={{clipPath:"polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)"}}>
+              <Button size="lg" variant="outline" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })} className="border border-primary/50 text-primary hover:bg-primary/10 font-heading text-base tracking-wider rounded-none px-8 py-6 backdrop-blur-sm" style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}>
                 GET A QUOTE
               </Button>
             </motion.div>
 
-            <motion.div custom={0.5}  className="flex flex-wrap gap-2 mt-2">
+            <motion.div custom={0.5} className="flex flex-wrap gap-2 mt-2">
               {["Video Editing", "Motion Graphics", "VFX", "CGI", "Content Production"].map((tag) => (
                 <span key={tag} className="text-xs font-bold tracking-widest uppercase px-3 py-1 border border-primary/30 text-primary/80 bg-primary/5 backdrop-blur-sm font-heading">{tag}</span>
               ))}
@@ -188,10 +193,10 @@ export default function Home() {
       {/* ─── 2. Stats ─────────────────────────────────────────────── */}
       <section className="py-12 border-y border-secondary/20 bg-card/50 relative z-10">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <StatBox value="500+" label="Projects Delivered" />
-          <StatBox value="50+" label="Happy Clients" />
-          <StatBox value="8+" label="Years of Craft" />
-          <StatBox value="15+" label="Industry Awards" />
+          <StatBox value="250+" label="Projects Delivered" />
+          <StatBox value="40+" label="Happy Clients" />
+          <StatBox value="4+" label="Years of Craft" />
+          <StatBox value="1+" label="Industry Awards" />
         </div>
       </section>
 
@@ -208,12 +213,12 @@ export default function Home() {
             </motion.p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <ServiceCard icon={<Clapperboard className="w-7 h-7 text-secondary" />} title="Video Editing" desc="Cinematic cuts, color grading, and seamless storytelling that captivate from frame one." items={["Narrative & documentary editing", "Color correction & grading", "Sound design & audio mixing", "Multi-platform delivery"]} accent="secondary" delay={0.1} />
-            <ServiceCard icon={<Layers className="w-7 h-7 text-primary" />} title="Motion Graphics" desc="Kinetic typography, animated logos, and abstract visual storytelling that moves with purpose." items={["Animated logo reveals", "Kinetic typography & titles", "Lower thirds & broadcast packages", "Animated infographics"]} accent="primary" delay={0.2} />
+            <ServiceCard icon={<Eye className="w-7 h-7 text-primary" />} title="3D-Animation" desc="From concept to final render, we bring 3D characters and environments to life." items={["Concept development", "Character animation", "Environment design", "Final rendering"]} accent="primary" delay={0.6} />
             <ServiceCard icon={<Zap className="w-7 h-7 text-secondary" />} title="VFX & Compositing" desc="Visual effects, rotoscoping, particle systems — blurring the line between reality and imagination." items={["Green screen & rotoscoping", "Particle & simulation effects", "Environment extensions", "Seamless compositing"]} accent="secondary" delay={0.3} />
             <ServiceCard icon={<Cpu className="w-7 h-7 text-primary" />} title="CGI Production" desc="Photorealistic 3D modeling, texturing, lighting, and rendering for any platform or medium." items={["3D product visualization", "Architectural walkthroughs", "Character & creature design", "Photorealistic renders"]} accent="primary" delay={0.4} />
+            <ServiceCard icon={<Layers className="w-7 h-7 text-primary" />} title="Motion Graphics" desc="Kinetic typography, animated logos, and abstract visual storytelling that moves with purpose." items={["Animated logo reveals", "Kinetic typography & titles", "Lower thirds & broadcast packages", "Animated infographics"]} accent="primary" delay={0.2} />
+            <ServiceCard icon={<Clapperboard className="w-7 h-7 text-secondary" />} title="Video Editing" desc="Cinematic cuts, color grading, and seamless storytelling that captivate from frame one." items={["Narrative & documentary editing", "Color correction & grading", "Sound design & audio mixing", "Multi-platform delivery"]} accent="secondary" delay={0.1} />
             <ServiceCard icon={<Film className="w-7 h-7 text-secondary" />} title="Content Production" desc="End-to-end creative content for social media, advertising, brand campaigns, and streaming." items={["Short-form reels & TikToks", "Long-form brand films", "Corporate & training videos", "Ad creatives & commercials"]} accent="secondary" delay={0.5} />
-            <ServiceCard icon={<Eye className="w-7 h-7 text-primary" />} title="Art Direction" desc="Concept development, moodboards, storyboarding, and visual identity for cohesive productions." items={["Concept development", "Storyboarding & animatics", "Visual identity for video", "Creative consultation"]} accent="primary" delay={0.6} />
           </div>
         </div>
       </section>
@@ -294,16 +299,7 @@ export default function Home() {
             Industry-standard software wielded by specialists — giving your project technical precision.
           </motion.p>
           <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-            {[
-              { label: "Pr", name: "Premiere Pro", color: "#E8771A" },
-              { label: "Ae", name: "After Effects", color: "#9999FF" },
-              { label: "Ps", name: "Photoshop", color: "#31A8FF" },
-              { label: "Lr", name: "Lightroom", color: "#31A8FF" },
-              { label: "Da", name: "DaVinci Resolve", color: "#00B4D8" },
-              { label: "Bl", name: "Blender", color: "#F5792A" },
-              { label: "C4D", name: "Cinema 4D", color: "#E8CA28" },
-              { label: "UE", name: "Unreal Engine", color: "#FFFFFF" },
-            ].map((tool, i) => (
+            {TOOLS.map((tool, i) => (
               <motion.div key={tool.name} initial={{ opacity: 0, scale: 0.7 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.5, ease: [0.16, 1, 0.3, 1] }} whileHover={{ scale: 1.12, y: -4 }} className="flex flex-col items-center gap-3 group cursor-default">
                 <div className="w-16 h-16 flex items-center justify-center border border-border/30 bg-card/60 transition-all" style={{ boxShadow: `0 0 0 0 ${tool.color}40` }}>
                   <span className="font-heading font-black text-2xl" style={{ color: tool.color }}>{tool.label}</span>
@@ -318,12 +314,10 @@ export default function Home() {
       {/* ─── 10. Our Work — Cinematic Showreel ───────────────────── */}
       <section id="work" className="relative z-10">
         {/* Section header */}
-        <div className="py-16 px-6 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-6">
-          <div>
-            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-secondary font-bold tracking-[0.2em] uppercase text-sm mb-2 block">// Selected Projects</motion.span>
-            <AnimatedHeading text="Our Work" className="text-4xl md:text-6xl font-heading font-black uppercase" />
-          </div>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-muted-foreground max-w-sm font-sans">
+        <div className="text-center mb-16">
+          <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-secondary font-bold tracking-[0.2em] uppercase text-sm mb-2 block">// Selected Projects</motion.span>
+          <AnimatedHeading text="Our Work" className="text-4xl md:text-6xl font-heading font-black uppercase" />
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-muted-foreground max-w-2xl mx-auto text-lg mb-16">
             A showcase of cinematic work crafted for brands and storytellers. Use the arrows or dots to navigate — or let it play.
           </motion.p>
         </div>
@@ -334,12 +328,14 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          <CinematicShowreel />
+          {/* <CinematicShowreel /> */}
+          <ImageGrid setSelectedCategory={setSelectedCategory} />
+          <VideoSlider selectedCategory={selectedCategory} />
         </motion.div>
       </section>
 
       {/* ─── 11. Trusted By ───────────────────────────────────────── */}
-      <section className="py-16 px-6 bg-card/20 relative z-10 border-y border-border/10 overflow-hidden">
+      {/* <section className="py-16 px-6 bg-card/20 relative z-10 border-y border-border/10 overflow-hidden">
         <p className="text-xs font-heading tracking-[0.4em] text-muted-foreground/50 uppercase text-center mb-10">Trusted by brands &amp; creators worldwide</p>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
           {["NEXUS CORP", "VOID STUDIOS", "APEX MEDIA", "NEON LABS", "ORBIT BRANDS", "STARFIELD CO"].map((brand, i) => (
@@ -348,7 +344,7 @@ export default function Home() {
             </motion.span>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ─── 12. Testimonials ─────────────────────────────────────── */}
       <section className="py-24 px-6 relative z-10">
@@ -358,9 +354,11 @@ export default function Home() {
             <AnimatedHeading text="Client Signals" className="text-4xl md:text-6xl font-heading font-black uppercase" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <TestimonialCard quote="Meta Monk Visuals transformed our brand campaign into a cinematic experience. Their motion graphics work is unlike anything we've seen — every frame is intentional." author="Aria T." role="Creative Director, Nexus Corp" />
-            <TestimonialCard quote="The VFX and CGI quality is extraordinary. They delivered a full production pipeline — editing, compositing, 3D — on time and beyond expectations." author="Kael R." role="Lead Producer, Void Studios" />
-            <TestimonialCard quote="From concept to final delivery, the process was seamless. They understood our brand voice immediately and elevated everything with their visual storytelling." author="Sofia M." role="Brand Manager, Apex Media" />
+            <TestimonialCard quote="Meta Monk Visuals has been instrumental in elevating our content strategy. Their attention to detail and creative vision are unmatched." author="Aman IT" role="Youtube Content Creator" />
+            <TestimonialCard quote="Meta monk has helped us achieve our marketing goals with their innovative graphic solutions." author="RYU HASHEGI" role="Marketing Director, battlefy.com/" />
+            <TestimonialCard quote="Meta Monk Visuals transformed our brand campaign into a cinematic experience. Their motion graphics work is unlike anything we've seen — every frame is intentional." author="Ali Azhar" role="Individual Creator" />
+            <TestimonialCard quote="The VFX and CGI quality is extraordinary. They delivered a full production pipeline — editing, compositing, 3D — on time and beyond expectations." author="Gouranshi." role="Marketing Head, Hyperlinq Technologies" />
+            <TestimonialCard quote="From concept to final delivery, the process was seamless. They understood our brand voice immediately and elevated everything with their visual storytelling." author="Dev Sharma" role="Broker" />
           </div>
         </div>
       </section>
@@ -435,6 +433,12 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+      {/* ─── NN. CTA ──────────────────────────────────────────────── */}
+      <section id="contact" className="py-40 px-6 relative z-10 text-center">
+        <div className="absolute inset-0 bg-primary/5 blur-[100px] -z-10" />
+        <AboutUs />
+      </section>
+
 
       {/* ─── 15. Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-border/20 py-12 px-6 bg-background relative z-10">
@@ -463,9 +467,10 @@ export default function Home() {
             <div>
               <h4 className="font-heading font-bold text-sm tracking-widest uppercase mb-4 text-foreground/80">Connect</h4>
               <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-                <li><a href="#" className="hover:text-secondary transition-colors">Instagram</a></li>
-                <li><a href="#" className="hover:text-secondary transition-colors">YouTube</a></li>
-                <li><a href="#" className="hover:text-secondary transition-colors">Behance</a></li>
+                <li><a href="https://www.instagram.com/metamonkvisuals/" className="hover:text-secondary transition-colors">Instagram</a></li>
+                <li><a href="https://www.linkedin.com/in/meta-monk-visuals-4a6a11408?utm_source=share_via&utm_content=profile&utm_medium=member_android" className="hover:text-secondary transition-colors">LinkedIn</a></li>
+                <li><a href="https://www.youtube.com/@MetaMonkVisuals" className="hover:text-secondary transition-colors">YouTube</a></li>
+                <li><a href="https://www.behance.net/meta-monk-visuals" className="hover:text-secondary transition-colors">Behance</a></li>
                 <li><a href="mailto:hello@metamonkvisuals.com" className="hover:text-secondary transition-colors">hello@metamonkvisuals.com</a></li>
               </ul>
             </div>
@@ -485,7 +490,7 @@ export default function Home() {
 function StatBox({ value, label }: { value: string; label: string }) {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-      <p className="text-3xl md:text-5xl font-heading font-black text-primary mb-1" style={{textShadow:"0 0 20px rgba(255,215,0,0.4)"}}>{value}</p>
+      <p className="text-3xl md:text-5xl font-heading font-black text-primary mb-1" style={{ textShadow: "0 0 20px rgba(255,215,0,0.4)" }}>{value}</p>
       <p className="text-muted-foreground text-sm uppercase tracking-widest font-sans">{label}</p>
     </motion.div>
   );
@@ -502,7 +507,7 @@ function ServiceCard({ icon, title, desc, items, accent, delay }: { icon: React.
       className={`glass-panel p-6 border border-border/20 ${accent === "secondary" ? "hover:border-secondary/40" : "hover:border-primary/40"} transition-all group flex flex-col gap-4`}
     >
       <div className="flex items-center gap-3">
-        <div className={`w-11 h-11 flex items-center justify-center border ${accent === "secondary" ? "border-secondary/30 bg-secondary/10" : "border-primary/30 bg-primary/10"}`} style={{clipPath:"polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)"}}>
+        <div className={`w-11 h-11 flex items-center justify-center border ${accent === "secondary" ? "border-secondary/30 bg-secondary/10" : "border-primary/30 bg-primary/10"}`} style={{ clipPath: "polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%)" }}>
           {icon}
         </div>
         <h3 className="font-heading font-bold text-lg uppercase">{title}</h3>
