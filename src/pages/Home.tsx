@@ -20,7 +20,7 @@ import CinematicShowreel from "@/components/CinematicShowreel";
 
 import heroImage from "@assets/MM_BANDAR.jpeg";
 import TOOLS from "@/data/tools";
-import AboutUs from "@/components/AboutUS";
+import AboutUs from "@/components/AboutUs";
 import VideoSlider from "@/components/VideoSlider";
 import ImageGrid from "@/components/ImageGrid";
 // ─── Animation variants ───────────────────────────────────────────────────────
