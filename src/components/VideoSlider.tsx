@@ -13,6 +13,7 @@ interface VideoSlide {
 
 
 export default function VideoSlider({ selectedCategory }: { selectedCategory: string }) {
+    console.log("Selected category in VideoSlider:", selectedCategory);
     const [current, setCurrent] = useState(0);
     const [playing, setPlaying] = useState(true);
     const [muted, setMuted] = useState(true);
@@ -23,6 +24,11 @@ export default function VideoSlider({ selectedCategory }: { selectedCategory: st
     const [slide, setSlide] = useState<VideoSlide | null>(getVideosByCategory(selectedCategory)[0]);
     useEffect(() => {
         setVIDEOS(getVideosByCategory(selectedCategory || "Motion Graphics"));
+        setCurrent(0);
+        setProgress(0);
+        const newVideos = getVideosByCategory(selectedCategory || "Motion Graphics");
+        setSlide(newVideos[0] || null);
+        setPlaying(true);
     }, [selectedCategory]);
 
     const next = useCallback(() => {
@@ -106,7 +112,8 @@ export default function VideoSlider({ selectedCategory }: { selectedCategory: st
 
     useEffect(() => {
         setSlide(VIDEOS[current] || null);
-    }, [current, VIDEOS]);
+    }, [current]);
+    
     return (
         <div className="relative w-full overflow-hidden bg-black select-none" style={{ height: "82vh", minHeight: 480 }}>
 
