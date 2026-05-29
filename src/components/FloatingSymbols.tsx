@@ -15,9 +15,10 @@ interface SymbolDef {
 
 const SYMBOLS: SymbolDef[] = [
   { label: "Ps",  name: "Photoshop",      color: "#31A8FF", top: "14%", left: "58%", floatDuration: 5.2, floatDelay: 0.2, rotateDeg: -2, size: "md" },
-  { label: "Lr",  name: "Lightroom",      color: "#4FBBFF", top: "30%", left: "76%", floatDuration: 6.5, floatDelay: 1.0, rotateDeg:  3, size: "sm" },
-  { label: "Ae",  name: "Motion Graphics",color: "#9B8FFF", top: "62%", left: "60%", floatDuration: 4.8, floatDelay: 0.6, rotateDeg: -3, size: "md" },
-  { label: "VFX", name: "Visual Effects", color: "#5AC8FA", top: "18%", left: "84%", floatDuration: 7.0, floatDelay: 0.0, rotateDeg:  2, size: "lg" },
+  { label: "Lr",  name: "Lightroom",      color: "#afff8f", top: "30%", left: "76%", floatDuration: 6.5, floatDelay: 1.0, rotateDeg:  3, size: "sm" },
+  { label: "Fs",  name: "Fusion",         color: "#afff8f", top: "62%", left: "60%", floatDuration: 4.8, floatDelay: 0.6, rotateDeg: -3, size: "sm" },
+  { label: "Ae",  name: "Motion Graphics",color: "#9B8FFF", top: "40%", left: "60%", floatDuration: 6, floatDelay: 0.6, rotateDeg: -2, size: "md" },
+  { label: "VFX", name: "Visual Effects", color: "#eafa5a", top: "18%", left: "84%", floatDuration: 7.0, floatDelay: 0.0, rotateDeg:  2, size: "lg" },
   { label: "CGI", name: "3D & CGI",       color: "#F0C040", top: "52%", left: "82%", floatDuration: 5.6, floatDelay: 1.6, rotateDeg: -1, size: "md" },
   { label: "Pr",  name: "Premiere Pro",   color: "#EA7730", top: "76%", left: "70%", floatDuration: 6.0, floatDelay: 0.8, rotateDeg:  3, size: "sm" },
 ];

@@ -48,6 +48,16 @@ export default function ImageGrid({ columns = 2, rows = 2, setSelectedCategory }
         if (setSelectedCategory) {
             setSelectedCategory(category);
         }
+        setTimeout(() => {
+            const workSection = document.getElementById("video-slider");
+            if (workSection) {
+                const yOffset = workSection.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({ top: yOffset, behavior: "smooth" });
+            }
+        }, 100);
+        console.log("Selected category:", category);
+
+
     };
     const handleNextPage = () => {
         if (currentPage < totalPages - 1) {

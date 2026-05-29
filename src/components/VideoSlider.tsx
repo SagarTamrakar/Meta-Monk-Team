@@ -32,29 +32,34 @@ export default function VideoSlider({ selectedCategory }: { selectedCategory: st
     }, [selectedCategory]);
 
     const next = useCallback(() => {
-        if (VIDEOS.length < 2) {
-            setProgress(0);
-            setCurrent(0);
-            return
-        }
-        setCurrent((c) => (c + 1) % VIDEOS.length);
+        setCurrent((c) => {
+            const videosLength = VIDEOS.length;
+            if (videosLength < 2) {
+                setProgress(0);
+                return 0;
+            }
+            return (c + 1) % videosLength;
+        });
         setProgress(0);
-    }, []);
+    }, [VIDEOS]);
 
     const prev = useCallback(() => {
-        if (VIDEOS.length < 2) {
-            setProgress(0);
-            return
-        }
-        setCurrent((c) => (c - 1 + VIDEOS.length) % VIDEOS.length);
+        setCurrent((c) => {
+            const videosLength = VIDEOS.length;
+            if (videosLength < 2) {
+                setProgress(0);
+                return 0;
+            }
+            return (c - 1 + videosLength) % videosLength;
+        });
         setProgress(0);
-    }, []);
+    }, [VIDEOS]);
 
     const goToSlide = useCallback((index: number) => {
         if (VIDEOS.length < 2) return;
         setCurrent(index);
         setProgress(0);
-    }, []);
+    }, [VIDEOS]);
 
     /* Handle video time update */
     useEffect(() => {
@@ -112,10 +117,19 @@ export default function VideoSlider({ selectedCategory }: { selectedCategory: st
 
     useEffect(() => {
         setSlide(VIDEOS[current] || null);
-    }, [current]);
+    }, [current, VIDEOS]);
+
+    /* Reset video when source changes */
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video || !slide?.video) return;
+        
+        video.currentTime = 0;
+        setProgress(0);
+    }, [slide?.video]);
     
     return (
-        <div className="relative w-full overflow-hidden bg-black select-none" style={{ height: "82vh", minHeight: 480 }}>
+        <div id={"video-slider"} className="relative w-full overflow-hidden bg-black select-none" style={{ height: "82vh", minHeight: 480 }}>
 
             {/* ── Cinematic letterbox bars ── */}
             <div className="absolute top-0 left-0 right-0 z-30 bg-black" style={{ height: "7%" }} />
@@ -124,7 +138,7 @@ export default function VideoSlider({ selectedCategory }: { selectedCategory: st
             {/* ── Video slides ── */}
             <AnimatePresence mode="sync" initial={false}>
                 <motion.div
-                    key={current}
+                    key={slide?.video}
                     className="absolute inset-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -132,10 +146,10 @@ export default function VideoSlider({ selectedCategory }: { selectedCategory: st
                     transition={{ duration: 0.9, ease: "easeInOut" }}
                 >
                     {/* Video container */}
-                    <div className="absolute inset-0">
+                    <div className="absolute inset-0 flex items-center justify-center">
                         <video
                             ref={videoRef}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                             muted={muted}
                             controls={false}
                             preload="metadata"
@@ -211,7 +225,7 @@ export default function VideoSlider({ selectedCategory }: { selectedCategory: st
             <div className="absolute bottom-[9.5%] left-1/2 -translate-x-1/2 z-40 flex items-center gap-2">
                 {VIDEOS.map((_, i) => (
                     <button
-                        key={i}
+                    key={selectedCategory + i}
                         onClick={() => goToSlide(i)}
                         className="transition-all duration-300 rounded-full"
                         style={{

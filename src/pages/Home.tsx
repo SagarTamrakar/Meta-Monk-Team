@@ -77,6 +77,19 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const changeCategory = (category: string) => {
+    setSelectedCategory(category);
+    // Delay scroll to ensure state updates first
+    setTimeout(() => {
+      const workSection = document.getElementById("video-slider");
+      if (workSection) {
+        const yOffset = workSection.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: yOffset, behavior: "smooth" });
+      }
+    }, 100);
+    console.log("Selected category:", category);
+  };
+
   return (
     <div className="relative min-h-screen bg-background overflow-x-hidden selection:bg-secondary/30 selection:text-secondary">
 
@@ -213,12 +226,12 @@ export default function Home() {
             </motion.p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <ServiceCard icon={<Eye className="w-7 h-7 text-primary" />} title="3D-Animation" desc="From concept to final render, we bring 3D characters and environments to life." items={["Concept development", "Character animation", "Environment design", "Final rendering"]} accent="primary" delay={0.6} />
-            <ServiceCard icon={<Zap className="w-7 h-7 text-secondary" />} title="VFX & Compositing" desc="Visual effects, rotoscoping, particle systems — blurring the line between reality and imagination." items={["Green screen & rotoscoping", "Particle & simulation effects", "Environment extensions", "Seamless compositing"]} accent="secondary" delay={0.3} />
-            <ServiceCard icon={<Cpu className="w-7 h-7 text-primary" />} title="CGI Production" desc="Photorealistic 3D modeling, texturing, lighting, and rendering for any platform or medium." items={["3D product visualization", "Architectural walkthroughs", "Character & creature design", "Photorealistic renders"]} accent="primary" delay={0.4} />
-            <ServiceCard icon={<Layers className="w-7 h-7 text-primary" />} title="Motion Graphics" desc="Kinetic typography, animated logos, and abstract visual storytelling that moves with purpose." items={["Animated logo reveals", "Kinetic typography & titles", "Lower thirds & broadcast packages", "Animated infographics"]} accent="primary" delay={0.2} />
-            <ServiceCard icon={<Clapperboard className="w-7 h-7 text-secondary" />} title="Video Editing" desc="Cinematic cuts, color grading, and seamless storytelling that captivate from frame one." items={["Narrative & documentary editing", "Color correction & grading", "Sound design & audio mixing", "Multi-platform delivery"]} accent="secondary" delay={0.1} />
-            <ServiceCard icon={<Film className="w-7 h-7 text-secondary" />} title="Content Production" desc="End-to-end creative content for social media, advertising, brand campaigns, and streaming." items={["Short-form reels & TikToks", "Long-form brand films", "Corporate & training videos", "Ad creatives & commercials"]} accent="secondary" delay={0.5} />
+            <ServiceCard onChangeCategory={() => changeCategory("3D Animation")} icon={<Eye className="w-7 h-7 text-primary" />} title="3D-Animation" desc="From concept to final render, we bring 3D characters and environments to life." items={["Concept development", "Character animation", "Environment design", "Final rendering"]} accent="primary" delay={0.6} />
+            <ServiceCard onChangeCategory={() => changeCategory("CGI & VFX")} icon={<Zap className="w-7 h-7 text-secondary" />} title="VFX & Compositing" desc="Visual effects, rotoscoping, particle systems — blurring the line between reality and imagination." items={["Green screen & rotoscoping", "Particle & simulation effects", "Environment extensions", "Seamless compositing"]} accent="secondary" delay={0.3} />
+            <ServiceCard onChangeCategory={() => changeCategory("CGI & VFX")} icon={<Cpu className="w-7 h-7 text-primary" />} title="CGI Production" desc="Photorealistic 3D modeling, texturing, lighting, and rendering for any platform or medium." items={["3D product visualization", "Architectural walkthroughs", "Character & creature design", "Photorealistic renders"]} accent="primary" delay={0.4} />
+            <ServiceCard onChangeCategory={() => changeCategory("Motion Graphics")} icon={<Layers className="w-7 h-7 text-primary" />} title="Motion Graphics" desc="Kinetic typography, animated logos, and abstract visual storytelling that moves with purpose." items={["Animated logo reveals", "Kinetic typography & titles", "Lower thirds & broadcast packages", "Animated infographics"]} accent="primary" delay={0.2} />
+            <ServiceCard onChangeCategory={() => changeCategory("Video Editing")} icon={<Clapperboard className="w-7 h-7 text-secondary" />} title="Video Editing" desc="Cinematic cuts, color grading, and seamless storytelling that captivate from frame one." items={["Narrative & documentary editing", "Color correction & grading", "Sound design & audio mixing", "Multi-platform delivery"]} accent="secondary" delay={0.1} />
+            <ServiceCard onChangeCategory={() => changeCategory("Video Editing")} icon={<Film className="w-7 h-7 text-secondary" />} title="Content Production" desc="End-to-end creative content for social media, advertising, brand campaigns, and streaming." items={["Short-form reels & TikToks", "Long-form brand films", "Corporate & training videos", "Ad creatives & commercials"]} accent="secondary" delay={0.5} />
           </div>
         </div>
       </section>
@@ -364,7 +377,7 @@ export default function Home() {
       </section>
 
       {/* ─── 13. Pricing ──────────────────────────────────────────── */}
-      <section className="py-24 px-6 bg-card/30 relative z-10 border-y border-border/10">
+      {/* <section className="py-24 px-6 bg-card/30 relative z-10 border-y border-border/10">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
@@ -378,7 +391,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a href="mailto:hello@metamonkvisuals.com">
+              <a href="mailto:metamonkvisuals@gmail.com">
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading tracking-wider rounded-none px-10 py-6 shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:shadow-[0_0_35px_rgba(255,215,0,0.6)]">
                   GET A FREE QUOTE <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -401,7 +414,7 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ─── 14. CTA ──────────────────────────────────────────────── */}
       <section id="contact" className="py-40 px-6 relative z-10 text-center">
@@ -420,12 +433,12 @@ export default function Home() {
             Ready to bring your vision to life? Whether it's a social campaign, a full brand film, or a CGI production — we're ready to build something extraordinary together.
           </motion.p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:hello@metamonkvisuals.com">
+            <a href="mailto:metamonkvisuals@gmail.com">
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-heading text-xl tracking-widest rounded-none px-12 py-8 shadow-[0_0_20px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.7)] w-full sm:w-auto">
                 GET IN TOUCH
               </Button>
             </a>
-            <a href="mailto:hello@metamonkvisuals.com">
+            <a href="mailto:metamonkvisuals@gmail.com">
               <Button size="lg" variant="outline" className="border-secondary/50 text-secondary hover:bg-secondary/10 font-heading text-xl tracking-widest rounded-none px-12 py-8 w-full sm:w-auto">
                 SEND A BRIEF
               </Button>
@@ -451,7 +464,7 @@ export default function Home() {
             <div>
               <h4 className="font-heading font-bold text-sm tracking-widest uppercase mb-4 text-foreground/80">Services</h4>
               <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-                {["Video Editing", "Motion Graphics", "VFX & Compositing", "CGI Production", "Content Production", "Art Direction"].map((s) => (
+                {["Video Editing", "Motion Graphics", "VFX & Compositing", "CGI Production", "Content Production", "3D Animation"].map((s) => (
                   <li key={s}><a href="#services" className="hover:text-secondary transition-colors">{s}</a></li>
                 ))}
               </ul>
@@ -470,8 +483,9 @@ export default function Home() {
                 <li><a href="https://www.instagram.com/metamonkvisuals/" className="hover:text-secondary transition-colors">Instagram</a></li>
                 <li><a href="https://www.linkedin.com/in/meta-monk-visuals-4a6a11408?utm_source=share_via&utm_content=profile&utm_medium=member_android" className="hover:text-secondary transition-colors">LinkedIn</a></li>
                 <li><a href="https://www.youtube.com/@MetaMonkVisuals" className="hover:text-secondary transition-colors">YouTube</a></li>
-                <li><a href="https://www.behance.net/meta-monk-visuals" className="hover:text-secondary transition-colors">Behance</a></li>
-                <li><a href="mailto:hello@metamonkvisuals.com" className="hover:text-secondary transition-colors">hello@metamonkvisuals.com</a></li>
+                <li><a href="https://wa.me/9026811800" className="hover:text-secondary transition-colors">WhatsApp</a></li>
+                <li><a href="mailto:metamonkvisuals@gmail.com" className="hover:text-secondary transition-colors">metamonkvisuals@gmail.com</a></li>
+                <li><a href="tel:+917007926299" className="hover:text-secondary transition-colors">+91-7007926299</a></li>
               </ul>
             </div>
           </div>
@@ -496,7 +510,7 @@ function StatBox({ value, label }: { value: string; label: string }) {
   );
 }
 
-function ServiceCard({ icon, title, desc, items, accent, delay }: { icon: React.ReactNode; title: string; desc: string; items: string[]; accent: string; delay: number }) {
+function ServiceCard({ icon, title, desc, items, accent, delay, onChangeCategory }: { icon: React.ReactNode; title: string; desc: string; items: string[]; accent: string; delay: number; onChangeCategory: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -521,6 +535,10 @@ function ServiceCard({ icon, title, desc, items, accent, delay }: { icon: React.
           </li>
         ))}
       </ul>
+      <button onClick={onChangeCategory} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold tracking-wider uppercase transition-all duration-300 group/btn hover:text-secondary cursor-pointer">
+        Know More
+        <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+      </button>
     </motion.div>
   );
 }
