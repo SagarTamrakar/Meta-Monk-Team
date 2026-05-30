@@ -11,7 +11,7 @@ interface VideoData {
     index: string;
 }
 
-export default function Portfolio({category}: {category: string}) {
+export default function Portfolio({ category }: { category: string }) {
     const [selectedCategory, setSelectedCategory] = useState<string>(category || VIDEO_CATEGORIES.CGI_VFX);
     const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
     const [isPlayingOverlay, setIsPlayingOverlay] = useState(false);
@@ -114,7 +114,7 @@ export default function Portfolio({category}: {category: string}) {
                                 className="group relative h-40 sm:h-48 rounded-lg overflow-hidden cursor-pointer border border-border/20 hover:border-secondary/40 transition-all duration-300"
                             >
                                 {/* Video Thumbnail Background */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20" />
+                                <img src={`/thumbnails${video.video.replace('.mp4', '_thumb.png')}`} alt={"video.title"} className="w-full h-full object-cover" />
 
                                 {/* Play Button Icon */}
                                 <motion.div
