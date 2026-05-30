@@ -23,6 +23,7 @@ import TOOLS from "@/data/tools";
 import AboutUs from "@/components/AboutUs";
 import VideoSlider from "@/components/VideoSlider";
 import ImageGrid from "@/components/ImageGrid";
+import Portfolio from "@/components/Portfolio";
 // ─── Animation variants ───────────────────────────────────────────────────────
 
 const fadeUp = {
@@ -347,7 +348,10 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ─── 11. Trusted By ───────────────────────────────────────── */}
+      {/* ─── 11. Portfolio Gallery ────────────────────────────────── */}
+      <Portfolio />
+
+      {/* ─── 12. Trusted By ───────────────────────────────────────── */}
       {/* <section className="py-16 px-6 bg-card/20 relative z-10 border-y border-border/10 overflow-hidden">
         <p className="text-xs font-heading tracking-[0.4em] text-muted-foreground/50 uppercase text-center mb-10">Trusted by brands &amp; creators worldwide</p>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
@@ -359,7 +363,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* ─── 12. Testimonials ─────────────────────────────────────── */}
+      {/* ─── 13. Testimonials ─────────────────────────────────────── */}
       <section className="py-24 px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
