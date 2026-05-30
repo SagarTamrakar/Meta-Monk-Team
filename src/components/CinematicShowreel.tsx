@@ -20,62 +20,14 @@ interface Slide {
 }
 
 const SLIDES: Slide[] = [
-  {
-    img: img1,
-    category: "",
-    title: "",
-    desc: "",
-    index: "01"
-  },
-  {
-    img: img2,
-    category: "",
-    title: "",
-    desc: "",
-    index: "02"
-  },
-  {
-    img: img3,
-    category: "Motion Graphics",
-    title: "",
-    desc: "",
-    index: "03"
-  },
-  {
-    img: img4,
-    category: "",
-    title: "",
-    desc: "",
-    index: "04"
-  },
-  {
-    img: img5,
-    category: "",
-    title: "",
-    desc: "",
-    index: "05"
-  },
-  {
-    img: img6,
-    category: "",
-    title: "",
-    desc: "",
-    index: "06"
-  },
-  {
-    img: img7,
-    category: "",
-    title: "",
-    desc: "",
-    index: "07"
-  },
-  {
-    img: img8,
-    category: "",
-    title: "",
-    desc: "",
-    index: "08"
-  },
+  { img: img1, category: "VFX Composition", title: "Neon Metropolis", desc: "Cinematic VFX for a global brand launch", index: "01" },
+  { img: img2, category: "CGI Production", title: "Digital Horizon", desc: "Photorealistic 3D product visualization", index: "02" },
+  { img: img3, category: "Motion Graphics", title: "Kinetic Identity", desc: "Full animated brand identity system", index: "03" },
+  { img: img4, category: "Video Editing", title: "The Last Frame", desc: "Documentary-style cinematic brand film", index: "04" },
+  { img: img5, category: "Content Production", title: "Viral Engine", desc: "50M+ combined views social campaign", index: "05" },
+  { img: img6, category: "Art Direction", title: "Visual Odyssey", desc: "Concept-to-screen creative direction", index: "06" },
+  { img: img7, category: "Color Grading", title: "Chromatic Series", desc: "Precision color pipeline for streaming", index: "07" },
+  { img: img8, category: "Brand Film", title: "Story of Now", desc: "Flagship corporate storytelling campaign", index: "08" },
 ];
 
 /* Ken Burns parameters — alternate zoom direction each slide */
@@ -96,7 +48,6 @@ export default function CinematicShowreel() {
   const [current, setCurrent] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [slide, setSlide] = useState(SLIDES[0]);
 
   const next = useCallback(() => {
     setCurrent((c) => (c + 1) % SLIDES.length);
@@ -120,9 +71,7 @@ export default function CinematicShowreel() {
     return () => clearInterval(interval);
   }, [playing, next]);
 
-  useEffect(() => {
-    setSlide(SLIDES[current]);
-  }, [current]);
+  const slide = SLIDES[current];
   const kb = KB[current];
 
   return (
@@ -156,7 +105,6 @@ export default function CinematicShowreel() {
               draggable={false}
             />
           </motion.div>
-
           {/* Bottom gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
           {/* Side vignette */}
@@ -181,7 +129,7 @@ export default function CinematicShowreel() {
           >
             {/* Category badge */}
             <div className="inline-flex items-center gap-2 mb-3">
-              {/* <span className="w-6 h-px bg-primary/80" /> */}
+              <span className="w-6 h-px bg-primary/80" />
               <span className="text-primary font-heading font-bold tracking-[0.25em] uppercase text-xs">
                 {slide.category}
               </span>

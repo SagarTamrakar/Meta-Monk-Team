@@ -24,6 +24,7 @@ import AboutUs from "@/components/AboutUs";
 import VideoSlider from "@/components/VideoSlider";
 import ImageGrid from "@/components/ImageGrid";
 import Portfolio from "@/components/Portfolio";
+import { VIDEO_CATEGORIES } from "@/data/videoPaths";
 // ─── Animation variants ───────────────────────────────────────────────────────
 
 const fadeUp = {
@@ -66,7 +67,7 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const heroRef = React.useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = React.useState(0);
-  const [selectedCategory, setSelectedCategory] = React.useState("Motion Graphics");
+  const [selectedCategory, setSelectedCategory] = React.useState("CGI & VFX");
 
   // Global scroll progress for the thin top bar
   const { scrollYProgress: globalProgress } = useScroll();
@@ -82,7 +83,7 @@ export default function Home() {
     setSelectedCategory(category);
     // Delay scroll to ensure state updates first
     setTimeout(() => {
-      const workSection = document.getElementById("video-slider");
+      const workSection = document.getElementById("category-badges");
       if (workSection) {
         const yOffset = workSection.getBoundingClientRect().top + window.scrollY - 100;
         window.scrollTo({ top: yOffset, behavior: "smooth" });
@@ -108,14 +109,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <LogoFull size={44} />
           <div className="hidden md:flex items-center gap-8 font-sans font-semibold tracking-wider text-sm">
-            {["#services:SERVICES", "#process:PROCESS", "#work:OUR WORK", "#arsenal:TOOLS", "#contact:CONTACT"].map((item) => {
+            {["#services:SERVICES", "#process:PROCESS", "#portfolio:PORTFOLIO", "#work:OUR WORK", "#arsenal:TOOLS", "#contact:CONTACT"].map((item) => {
               const [href, label] = item.split(":");
               return (
                 <a key={href} href={href} className="text-muted-foreground hover:text-secondary transition-all duration-300">{label}</a>
               );
             })}
             <Button
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => document.getElementById("get-started")?.scrollIntoView({ behavior: "smooth" })}
               className="bg-primary/10 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(255,215,0,0.3)] hover:shadow-[0_0_25px_rgba(255,215,0,0.6)] font-heading rounded-none"
             >
               GET STARTED
@@ -135,7 +136,7 @@ export default function Home() {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-0 z-40 bg-background/97 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col gap-6 font-heading text-xl"
           >
-            {["#services:SERVICES", "#process:PROCESS", "#work:OUR WORK", "#arsenal:TOOLS", "#contact:CONTACT"].map((item) => {
+            {["#services:SERVICES", "#process:PROCESS", "#portfolio:PORTFOLIO", "#work:OUR WORK", "#arsenal:TOOLS", "#contact:CONTACT"].map((item) => {
               const [href, label] = item.split(":");
               return (
                 <a key={href} href={href} onClick={() => setIsMobileMenuOpen(false)} className="text-foreground hover:text-secondary border-b border-border/50 pb-4">{label}</a>
@@ -178,7 +179,7 @@ export default function Home() {
             </div>
 
             <motion.p custom={0.3} className="text-base md:text-lg text-foreground/70 max-w-md leading-relaxed font-sans">
-              A creative multimedia studio crafting cinematic video edits, motion graphics, VFX, CGI, and high-impact content — for brands and storytellers who demand the extraordinary.
+              A creative multimedia studio crafting 3D Animations, CGI & VFX, cinematic video edits, motion graphics and high-impact content — for brands and storytellers who demand the extraordinary.
             </motion.p>
 
             <motion.div custom={0.4} className="flex flex-wrap gap-4 mt-2">
@@ -191,7 +192,7 @@ export default function Home() {
             </motion.div>
 
             <motion.div custom={0.5} className="flex flex-wrap gap-2 mt-2">
-              {["Video Editing", "Motion Graphics", "VFX", "CGI", "Content Production"].map((tag) => (
+              {["3D Animation", "VFX", "CGI", "Video Editing", "Motion Graphics", "Content Production"].map((tag) => (
                 <span key={tag} className="text-xs font-bold tracking-widest uppercase px-3 py-1 border border-primary/30 text-primary/80 bg-primary/5 backdrop-blur-sm font-heading">{tag}</span>
               ))}
             </motion.div>
@@ -326,9 +327,9 @@ export default function Home() {
       </section>
 
       {/* ─── 10. Our Work — Cinematic Showreel ───────────────────── */}
-      <section id="work" className="relative z-10">
+      <section className="relative z-10">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="text-center" id="work">
           <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-secondary font-bold tracking-[0.2em] uppercase text-sm mb-2 block">// Selected Projects</motion.span>
           <AnimatedHeading text="Our Work" className="text-4xl md:text-6xl font-heading font-black uppercase" />
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-muted-foreground max-w-2xl mx-auto text-lg mb-16">
@@ -342,14 +343,14 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* <CinematicShowreel /> */}
-          <ImageGrid setSelectedCategory={setSelectedCategory} />
-          <VideoSlider selectedCategory={selectedCategory} />
+          <CinematicShowreel />
+          {/* <ImageGrid setSelectedCategory={setSelectedCategory} /> */}
+          {/* <VideoSlider selectedCategory={selectedCategory} /> */}
         </motion.div>
       </section>
 
       {/* ─── 11. Portfolio Gallery ────────────────────────────────── */}
-      <Portfolio />
+      <Portfolio category={selectedCategory} />
 
       {/* ─── 12. Trusted By ───────────────────────────────────────── */}
       {/* <section className="py-16 px-6 bg-card/20 relative z-10 border-y border-border/10 overflow-hidden">
@@ -421,18 +422,16 @@ export default function Home() {
       </section> */}
 
       {/* ─── 14. CTA ──────────────────────────────────────────────── */}
-      <section id="contact" className="py-40 px-6 relative z-10 text-center">
-        <div className="absolute inset-0 bg-primary/5 blur-[100px] -z-10" />
+      <section className="py-40 px-6 relative z-10 text-center">
+        <div className="absolute inset-0 bg-primary/5 blur-[100px] -z-10" id="get-started" />
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} className="max-w-3xl mx-auto glass-panel p-12 md:p-20 border-primary/30 relative overflow-hidden">
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-secondary/20 rounded-full blur-[50px]" />
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="flex justify-center mb-8"
           >
             <LogoMark size={96} />
           </motion.div>
-          <AnimatedHeading text="Start a Project" className="text-4xl md:text-6xl font-heading font-black uppercase mb-6 text-glow-gold" delay={0.1} />
+          <AnimatedHeading text="Create something better with us" className="text-2xl md:text-4xl font-heading font-black uppercase mb-6" delay={0.1} />
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="text-xl text-muted-foreground mb-10 font-sans">
             Ready to bring your vision to life? Whether it's a social campaign, a full brand film, or a CGI production — we're ready to build something extraordinary together.
           </motion.p>
@@ -451,7 +450,7 @@ export default function Home() {
         </motion.div>
       </section>
       {/* ─── NN. CTA ──────────────────────────────────────────────── */}
-      <section id="contact" className="py-40 px-6 relative z-10 text-center">
+      <section className="py-40 px-6 relative z-10 text-center">
         <div className="absolute inset-0 bg-primary/5 blur-[100px] -z-10" />
         <AboutUs />
       </section>
@@ -459,16 +458,17 @@ export default function Home() {
 
       {/* ─── 15. Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-border/20 py-12 px-6 bg-background relative z-10">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto" id="contact">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
             <div className="col-span-1">
               <LogoFull size={36} />
               <p className="text-muted-foreground text-sm font-sans mt-4 leading-relaxed">A creative multimedia studio turning bold ideas into cinematic reality — one frame at a time.</p>
+              <p className="text-muted-foreground text-md font-sans mt-4 leading-relaxed">IN THE SEARCH OF INFINITY</p>
             </div>
             <div>
               <h4 className="font-heading font-bold text-sm tracking-widest uppercase mb-4 text-foreground/80">Services</h4>
               <ul className="space-y-2 text-sm text-muted-foreground font-sans">
-                {["Video Editing", "Motion Graphics", "VFX & Compositing", "CGI Production", "Content Production", "3D Animation"].map((s) => (
+                {["VFX & Compositing", "CGI Production", "3D Animation", "Video Editing", "Motion Graphics", "Content Production"].map((s) => (
                   <li key={s}><a href="#services" className="hover:text-secondary transition-colors">{s}</a></li>
                 ))}
               </ul>
@@ -486,7 +486,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-muted-foreground font-sans">
                 <li><a href="https://www.instagram.com/metamonkvisuals/" className="hover:text-secondary transition-colors">Instagram</a></li>
                 <li><a href="https://www.linkedin.com/in/meta-monk-visuals-4a6a11408?utm_source=share_via&utm_content=profile&utm_medium=member_android" className="hover:text-secondary transition-colors">LinkedIn</a></li>
-                <li><a href="https://www.youtube.com/@MetaMonkVisuals" className="hover:text-secondary transition-colors">YouTube</a></li>
+                {/* <li><a href="https://www.youtube.com/@MetaMonkVisuals" className="hover:text-secondary transition-colors">YouTube</a></li> */}
                 <li><a href="https://wa.me/9026811800" className="hover:text-secondary transition-colors">WhatsApp</a></li>
                 <li><a href="mailto:metamonkvisuals@gmail.com" className="hover:text-secondary transition-colors">metamonkvisuals@gmail.com</a></li>
                 <li><a href="tel:+917007926299" className="hover:text-secondary transition-colors">+91-7007926299</a></li>
@@ -495,7 +495,7 @@ export default function Home() {
           </div>
           <div className="border-t border-border/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm font-sans">© {new Date().getFullYear()} Meta Monk Visuals. All rights reserved.</p>
-            <p className="text-xs text-muted-foreground/40 font-sans">Video Editing · Motion Graphics · VFX · CGI · Content Production</p>
+            <p className="text-xs text-muted-foreground/40 font-sans">VFX · CGI · Video Editing · Motion Graphics · Content Production</p>
           </div>
         </div>
       </footer>
