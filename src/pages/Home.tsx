@@ -317,7 +317,10 @@ export default function Home() {
             {TOOLS.map((tool, i) => (
               <motion.div key={tool.name} initial={{ opacity: 0, scale: 0.7 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.5, ease: [0.16, 1, 0.3, 1] }} whileHover={{ scale: 1.12, y: -4 }} className="flex flex-col items-center gap-3 group cursor-default">
                 <div className="w-16 h-16 flex items-center justify-center border border-border/30 bg-card/60 transition-all" style={{ boxShadow: `0 0 0 0 ${tool.color}40` }}>
-                  <span className="font-heading font-black text-2xl" style={{ color: tool.color }}>{tool.label}</span>
+                  <img src={tool.icon} alt={tool.name} className="w-20 h-20" />
+                  {/* <span className="font-heading font-black text-2xl" style={{ color: tool.color }}>
+                    {tool.label}
+                  </span> */}
                 </div>
                 <span className="text-xs text-muted-foreground font-sans tracking-wider group-hover:text-foreground transition-colors">{tool.name}</span>
               </motion.div>
