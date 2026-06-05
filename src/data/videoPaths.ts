@@ -3,6 +3,11 @@
  * Used by VideoSlider component
  */
 
+// Helper function to properly encode paths with spaces for cross-platform compatibility
+const encodePath = (path: string): string => {
+  return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+};
+
 export const VIDEO_CATEGORIES = {
   MOTION_GRAPHICS: "Motion Graphics",
   "3D_ANIMATION": "3D Animation",
@@ -282,5 +287,8 @@ export const ALL_VIDEOS = [
 export const getVideosByCategory = (
   category: string
 ) => {
-  return ALL_VIDEOS.filter((video) => video.category === category);
+  return ALL_VIDEOS.filter((video) => video.category === category).map((video) => ({
+    ...video,
+    video: encodePath(video.video),
+  }));
 };

@@ -32,6 +32,14 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname),
   publicDir: path.resolve(import.meta.dirname, "attached_assets"),
+  server: {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Cache-Control": "public, max-age=3600",
+    },
+  },
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,

@@ -30,8 +30,8 @@ export default function Portfolio({ category }: { category: string }) {
     }, [category]);
 
     return (
-        <section className="py-24 px-6 relative z-10" id="portfolio">
-            <div className="max-w-7xl mx-auto">
+        <section className="py-24 px-6 relative" id="portfolio">
+            <div className="max-w-7xl mx-auto z-10">
                 {/* Header */}
                 <div className="text-center mb-16">
                     <motion.span
@@ -166,7 +166,7 @@ export default function Portfolio({ category }: { category: string }) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsPlayingOverlay(false)}
-                        className="fixed inset-0 z-20 bg-black/90 flex items-center justify-center p-4"
+                        className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
                     >
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0 }}
@@ -180,14 +180,14 @@ export default function Portfolio({ category }: { category: string }) {
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setIsPlayingOverlay(false)}
-                                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-lg transition-all duration-300"
+                                className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-lg transition-all duration-300"
                                 aria-label="Close video"
                             >
                                 <X className="w-6 h-6 text-black" />
                             </motion.button>
 
                             {/* Video Player */}
-                            <div className="aspect-video bg-black flex items-center justify-center relative group">
+                            <div className="z-0 aspect-video bg-black flex items-center justify-center relative group">
                                 <video
                                     src={selectedVideo.video}
                                     controls

@@ -134,7 +134,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background/97 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col gap-6 font-heading text-xl"
+            className="fixed inset-0 z-10 bg-background/97 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col gap-6 font-heading text-xl"
           >
             {["#services:SERVICES", "#process:PROCESS", "#portfolio:PORTFOLIO", "#work:OUR WORK", "#arsenal:TOOLS", "#contact:CONTACT"].map((item) => {
               const [href, label] = item.split(":");
@@ -550,29 +550,6 @@ function ServiceCard({ icon, title, desc, items, accent, delay, onChangeCategory
   );
 }
 
-function WorkCard({ bg, label, title, desc, delay, className }: { bg: string; label: string; title: string; desc: string; delay: number; className?: string }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
-      className={`relative bg-gradient-to-br ${bg} border border-border/20 hover:border-secondary/30 transition-all overflow-hidden group cursor-pointer flex flex-col justify-end p-6 ${className ?? "h-56"}`}
-    >
-      <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
-      <motion.div className="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <div className="relative z-10">
-        <span className="text-xs font-heading tracking-widest text-secondary/80 uppercase block mb-1">{label}</span>
-        <h3 className="font-heading font-bold text-xl uppercase mb-1">{title}</h3>
-        <p className="text-muted-foreground text-sm font-sans">{desc}</p>
-      </div>
-      <motion.div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100" transition={{ duration: 0.2 }}>
-        <ArrowRight className="w-5 h-5 text-secondary" />
-      </motion.div>
-    </motion.div>
-  );
-}
 
 function TestimonialCard({ quote, author, role }: { quote: string; author: string; role: string }) {
   return (
