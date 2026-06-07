@@ -15,6 +15,7 @@ export default function Portfolio({ category }: { category: string }) {
     const [selectedCategory, setSelectedCategory] = useState<string>(category || VIDEO_CATEGORIES.CGI_VFX);
     const [selectedVideo, setSelectedVideo] = useState<VideoData | null>(null);
     const [isPlayingOverlay, setIsPlayingOverlay] = useState(false);
+    const [videoError, setVideoError] = useState<string | null>(null);
 
     const videos = getVideosByCategory(selectedCategory);
 
@@ -123,13 +124,20 @@ export default function Portfolio({ category }: { category: string }) {
                                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                     className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors duration-300"
                                 >
-                                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(255,215,0,0.6)]">
-                                        <Play className="w-8 h-8 text-black fill-black" />
-                                    </div>
                                 </motion.div>
-
                                 {/* Video Info */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div className="flex items-center justify-center bg-primary/50 hover:bg-primary/70 text-white p-2 rounded-full transition-colors duration-300">
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => setIsPlayingOverlay(false)}
+                                            className="items-center justify-center w-8 h-8 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center shadow-lg transition-all duration-300"
+                                            aria-label="Close video"
+                                        >
+                                            <Play className="w-6 h-6 text-black" />
+                                        </motion.button>
+                                    </div>
                                     <p className="text-secondary font-bold text-xs tracking-widest uppercase mb-1">
                                         {video.index}
                                     </p>
@@ -189,9 +197,14 @@ export default function Portfolio({ category }: { category: string }) {
                             {/* Video Player */}
                             <div className="z-0 aspect-video bg-black flex items-center justify-center relative group">
                                 <video
+                                    key={selectedVideo.video} // Force reload when video changes
                                     src={selectedVideo.video}
                                     controls
                                     autoPlay
+                                    muted
+                                    onError={(e) => {
+                                        console.error("Portfolio video error:", e.currentTarget.src);
+                                    }}
                                     playsInline
                                     preload="metadata"
                                     className="w-full h-full"

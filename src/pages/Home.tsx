@@ -134,7 +134,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-10 bg-background/97 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col gap-6 font-heading text-xl"
+            className="fixed inset-0 z-30 bg-background/97 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col gap-6 font-heading text-xl"
           >
             {["#services:SERVICES", "#process:PROCESS", "#portfolio:PORTFOLIO", "#work:OUR WORK", "#arsenal:TOOLS", "#contact:CONTACT"].map((item) => {
               const [href, label] = item.split(":");
