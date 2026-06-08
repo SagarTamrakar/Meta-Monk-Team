@@ -58,7 +58,7 @@ export default function VideoPlayer({ selectedVideo }: { selectedVideo: VideoDat
           muted
           autoplay
           playsinline
-          preload="metadata"
+          preload="auto"
         >
         <source src="${selectedVideo.video}" type="video/mp4" />
         </video>`
