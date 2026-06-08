@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Play } from "lucide-react";
 import { VIDEO_CATEGORIES, VIDEO_PATHS, getVideosByCategory } from "@/data/videoPaths";
+import VideoPlayer from "./VideoPlayer";
 
-interface VideoData {
+export interface VideoData {
     video: string;
     category: string;
     title: string;
@@ -196,20 +197,7 @@ export default function Portfolio({ category }: { category: string }) {
 
                             {/* Video Player */}
                             <div className="z-0 aspect-video bg-black flex items-center justify-center relative group">
-                                <video
-                                    key={selectedVideo.video} // Force reload when video changes
-                                    src={selectedVideo.video}
-                                    controls
-                                    autoPlay
-                                    muted
-                                    onError={(e) => {
-                                        console.error("Portfolio video error:", e.currentTarget.src);
-                                    }}
-                                    playsInline
-                                    preload="metadata"
-                                    className="w-full h-full"
-                                    controlsList="nodownload"
-                                />
+                                <VideoPlayer selectedVideo={selectedVideo} />
                             </div>
 
                             {/* Video Info */}
